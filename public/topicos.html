@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+    <div class="header">
+        <div class="banner">
+
+            <div class="container">
+                <div class="logo">
+
+                    <h1>Fórum Pokémaniacos
+                    </h1>
+
+                </div>
+                <div class="navs">
+                    <ul class="navbar navLeft">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html">Regras</a></li>
+                        <li><a href="membros.html">Membros</a></li>
+                    </ul>
+                    <ul class="navbar navRight" id="bntsLogin">
+                        <li><a href="#modalLogin">Login</a></li>
+                        <li><a href="#modalCadastro">Cadastro</a></li>
+                    </ul>
+                    <ul class="navbar navRight" style="display: none;" id="bntsPerfil">
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#" onclick="sair()">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h1 class="msg">O lugar onde os treinadores se reunem</h1>
+            <h1 class="msg">Faça já o seu <a href="#modalCadastro">cadastro</a> e junte-se há mais de 14054 treinadores</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="categorias">
+            <div class="categoria">
+                <div class="headerCategoria">
+                    <div class="tituloCategoria">
+
+                        <h1>Fórum</h1>
+                        <h3>Último tópico</h3>
+
+                    </div>
+                </div>
+
+                <div class="subCategoria">
+                    <div class="tituloSubCategoria">
+                        <h3>Novidades</h3>
+                    </div>
+                    <div class="status">
+                        <div class="statusTopicos">
+                            Tópicos:<br>
+                            45
+                        </div>
+                        <div class="statusMensagens">
+                            Mensagens:<br>
+                            45
+                        </div>
+                    </div>
+                    <div class="topicoRecente">
+                        <p>Lançamento</p>
+                        Lucas 02/11/2021
+                    </div>
+                </div>
+
+                <div class="subCategoria">
+                    <div class="tituloSubCategoria">
+                        <h3>Boas vindas</h3>
+                    </div>
+                    <div class="status">
+                        <div class="statusTopicos">
+                            Tópicos:<br>
+                            45
+                        </div>
+                        <div class="statusMensagens">
+                            Mensagens:<br>
+                            45
+                        </div>
+                    </div>
+                    <div class="topicoRecente">
+                        <p>Lançamento</p>
+                        Lucas 02/11/2021
+                    </div>
+                </div>
+
+
+            </div>
+        
+
+
+        </div>
+
+        <div class="statics">
+            <div class="card">
+                <div class="cardHeader">
+                    <h3 class="cardTitulo">
+                        Membros online
+                    </h3>
+                </div>
+                <div class="cardContent" id="divUsuariosOnline">
+               
+                </div>
+                <h3 class="cardFooter">
+                    Qtde membros online: <span id="spanQtdMembrosOnline"></span><!--11-->
+                </h3>
+            </div>
+
+            <div class="card">
+                <div class="cardHeader">
+                    <h3 class="cardTitulo">
+                        Estatísticas
+                    </h3>
+                </div>
+                <div class="cardContent">
+
+                    <div class="static">
+                        <p>Tópicos:</p>
+                        <p>Mensagens:</p>
+                        <p>Membros:</p>
+                        <p>Último membro:</p>
+                    </div>
+                    <div class="static">
+                        <p id="pTopicos"></p>
+                        <p id="pMensagens"></p>
+                        <p id="pMembros"></p>
+                        <p id="pUltimoMembro"></p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        Feito com amor por um aluno bandtec
+    </div>
+
+    <div id="modalLogin" class="modalFundo">
+        <div class="modal">
+            <div class="modalHeader">
+                <a class="close" href="#">&times;</a>
+                <h1>Login</h1>
+            </div>
+
+            <div class="modalContent">
+                <form class="container" id="formLogin" onsubmit="return logar()">
+                    <span>E-Mail:</span>
+                    <input type="email" name="email" placeholder="Email">
+                    <span>Senha:</span>
+                    <input type="password" name="senha" placeholder="Sua senha">
+
+                    <button>Login</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modalCadastro" class="modalFundo">
+        <div class="modal">
+            <div class="modalHeader">
+                <a class="close" href="#">&times;</a>
+                <h1>Cadastro</h1>
+            </div>
+
+            <div class="modalContent">
+                <form class="container" id="formCadastro" method="post" onsubmit="return cadastrarUsuario()">
+                    <span>Nome de usuário</span>
+                    <input type="text" name="nomeUsuario" placeholder="Nome de usuário">
+                    <span>E-Mail:</span>
+                    <input type="email" name="email" placeholder="Email">
+                    <span>Gênero:</span>
+                    <div class="genero">
+                        <input type="radio" name="genero" id="generoM" value="M">
+                        <label for="m">M</label>
+                        <input type="radio" name="genero" id="generoF" value="F">
+                        <label for="m">F</label>
+                    </div>
+                    <span>Senha:</span>
+                    <input type="password" name="senha" placeholder="Sua senha">
+                    <span>Confirmar Senha:</span>
+                    <input type="password" name="confSenha" placeholder="Confirmar senha">
+
+                    <button>Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        carregarCategorias();
+        validarSessao();
+        carregarMembrosOnline();
+        carregarUltimoMembro();
+        carregarQtdMembros();
+    </script>
+</body>
+
+</html>

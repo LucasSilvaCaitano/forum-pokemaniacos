@@ -1,0 +1,315 @@
+:root{
+    --vermelho: #391c57;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /*cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1309.ani), url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto !important;
+*/}
+
+body{
+ /*   background-image: url('../img/pokemon-4k-android-iphone-desktop-hd-backgrounds-wallpapers-1080p-4khd-wallpapers-desktop-background-android-iphone-1080p-4k-awyga.jpg');*/
+ background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/182616_cute-pokemon-hd-desktop-backgrounds-1678-hd-wallpapers-site_1920x1080_h.jpg');
+    
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    
+}
+/*rgb(57,28,87)*/
+
+.header .logo {
+    color: yellow;
+}
+
+.container{
+    width: 70%;
+    margin: auto;
+    
+}
+
+.categorias .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+
+.categorias {
+    width: 72%;
+}
+
+.header .container {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.logo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navs {
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+
+.navbar a{
+    text-decoration: none;
+    color: white;
+    transition-duration: 0.6s;
+    padding: 15px;
+    border-radius: 10px;
+    
+}
+
+.navLeft {
+    margin-left: -15px;
+}
+
+.navRight {
+    margin-right: -15px;
+}
+
+.navbar a:hover{
+    background-color: var(--vermelho);
+    color: white;
+}
+
+.banner{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 1080px;
+    opacity: 1.0;
+    text-align: center;
+    color: white;
+}
+
+.banner a{
+    color: white;
+    
+}
+
+.msg{
+    text-align: center;
+    margin-top: 350px;
+    color: white;
+}
+
+.main .container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.metricasSubCategoria {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.categoria, .cardStatics {
+    margin-top: 25px;
+}
+
+.subCategorias{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.headerCategoria{
+    height: 100px;
+    background-color: var(--vermelho);
+    color: black;
+    line-height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tituloCategoria{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subCategoria{
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.tituloSubCategoria{
+    width: 50%;
+}
+
+.status{
+    width: 165px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardStatics {
+    width: 200px;
+    
+}
+
+.cardStatics .card{
+    font-size: 15px;
+}
+
+.card {
+    background-color: var(--vermelho);
+
+    color: white;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    
+}
+
+.cardHeader{
+    background-color: var(--vermelho);
+
+    font-size: 15px;
+}
+
+.cardTitulo {
+    text-align: center;
+}
+
+.cardContent {
+    width: 80%;
+    padding: 30px;
+    font-size: 15px;
+
+}
+
+.cardFooter{
+    font-size: 15px;
+    
+    width: 100%;
+    background-color: #411c69;
+   
+}
+
+.cardFooterContent {
+    margin: auto;
+    width: 80%;
+    padding: 15px;
+}
+
+.static {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalFundo{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+
+}
+
+.modalFundo:target{
+    display: block;
+}
+
+.modal{
+    width: 40%;
+    margin: auto;
+}
+
+.modalHeader{
+    text-align: center;
+    background-color: var(--vermelho);
+}
+
+.modalContent{
+    background-color: white;
+}
+
+.modalContent form{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.modalContent span{
+    margin-top: 15px
+}
+
+.modalContent input{
+    width: 40%;
+    padding-left: 5px;
+}
+
+.modalContent input:not([type=radio]){
+    height: 25px;
+    border-radius: 15px;
+}
+
+.modalContent button{
+    margin: auto;
+    padding: 10px 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: var(--vermelho);
+    border: 0;
+    border-radius: 15px;
+    transition-duration: 0.6s;
+}
+
+.modalContent button:hover {
+    color: white;
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none
+}
+
+@media (max-width: 980px){
+  .cardStatics{
+      width: 100%;
+  }
+  .categorias{
+      width: 100%;
+  }
+}
