@@ -24,13 +24,13 @@
                 <div class="navs">
                     <ul class="navbar navLeft">
                         <li><a href="index.html">Inicio</a></li>
-                        <li><a href="index.html">Fórum</a></li>
+                        <li><a href="forum.html">Fórum</a></li>
                         <li><a href="index.html">Regras</a></li>
                         <li><a href="membros.html">Membros</a></li>
                     </ul>
                     <ul class="navbar navRight" id="bntsLogin">
-                        <li><a href="#modalLogin">Login</a></li>
-                        <li><a href="#modalCadastro">Cadastro</a></li>
+                        <li><a href="#" data-modal="modalLogin">Login</a></li>
+                        <li><a href="#" data-modal="modalCadastro">Cadastro</a></li>
                     </ul>
                     <ul class="navbar navRight" style="display: none;" id="bntsPerfil">
                         <li><a href="#">Perfil</a></li>
@@ -48,333 +48,122 @@
 
         <div class="container">
             <div class="categorias">
-             <!--   <div class="categoria">
-
-                    <h1 class="tituloCategoria" style="color: white;">Fórum</h1>
-
-
-                    <div class="subCategorias">
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                            >
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    NovidadesNovidades
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
+                <div class="subCategorias">
+                    <!--
+                    <div class="card">
+                        <div class="cardHeader">
+                            <img src="/img/foto.jpg">
+                            <h1 class="cardTitulo">Novidades</h1>
                         </div>
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
+                        <div class="cardContent">
+                            <div class="descricaoSubCategoria">Novidades relacionadas ao fórum</div>
+                            <div class="metricasSubCategoria">
+                                <dl>
+                                    <dt>Tópicos</dt>
+                                    <dd>1</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Mensagens</dt>
+                                    <dd>0</dd>
+                                </dl>
                             </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
                         </div>
-
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
+                        <div class="cardFooter">
+                            <div class="cardFooterContent">
+                                <div class="ultimoTopico">
+                                    <img src="img/foto.jpg">
+                                    <div class="topicoUsuario">
+                                        <p>
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                        </p>
+                                        <p>Lucas123 - 15/11/2021</p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
                         </div>
-
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
+                </div>
+                <div class="card">
+                    <div class="cardHeader"><img src="/img/foto.jpg">
+                        <h1 class="cardTitulo">Boas vindas</h1>
+                    </div>
+                    <div class="cardContent">
+                        <div class="descricaoSubCategoria">Novo no fórum? apresente-se aqui</div>
+                        <div class="metricasSubCategoria">
+                            <dl>
+                                <dt>Tópicos</dt>
+                                <dd>4</dd>
+                            </dl>
+                            <dl>
+                                <dt>Mensagens</dt>
+                                <dd>6</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="cardFooter">
+                        <div class="cardFooterContent">
+                            <p>Apresentação Ana</p>
+                            <p>Ana - 15/11/2021</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="categoria">
-                    <div class="tituloCategoria">
-                        <h1 style="color: white;">Fórum</h1>
+                <div class="card">
+                    <div class="cardHeader"><img src="/img/foto.jpg">
+                        <h1 class="cardTitulo">Sugestões</h1>
                     </div>
-
-                    <div class="subCategorias">
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
+                    <div class="cardContent">
+                        <div class="descricaoSubCategoria">Tem uma idéia do que acrescentar no fórum? poste aqui
                         </div>
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
+                        <div class="metricasSubCategoria">
+                            <dl>
+                                <dt>Tópicos</dt>
+                                <dd>0</dd>
+                            </dl>
+                            <dl>
+                                <dt>Mensagens</dt>
+                                <dd>0</dd>
+                            </dl>
                         </div>
-
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="card">
-                            <div class="cardHeader">
-                                <img src="https://pokemon-trainer.com/images/nodeimg/site.jpg" alt=""
-                                    style="margin: 0 auto; width: 100%; height: 200px">
-                                <h1 class="cardTitulo">
-                                    Novidades
-                                </h1>
-                            </div>
-                            <div class="cardContent">
-                                <div class="descricaoSubCategoria">
-                                    Novidades relacionadas ao fórum
-                                </div>
-                                <div class="metricasSubCategoria">
-                                    <dl>
-                                        <dt>Tópicos</dt>
-                                        <dd>3</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Mensagens</dt>
-
-                                        <dd>5</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <div class="cardFooter">
-                                <div class="cardFooterContent">
-                                    <p>
-                                        Lançamento
-                                    </p>
-                                    <p>
-                                        Lucas - 02/11/2021
-                                    </p>
-                                </div>
-                            </div>
-
+                    </div>
+                    <div class="cardFooter">
+                        <div class="cardFooterContent">
+                            <p></p>
+                            <p>null - null</p>
                         </div>
                     </div>
                 </div>-->
+
+                </div>
             </div>
             <div class="cardStatics">
+
+                <div class="card" id="perfil" style="display: none;">
+                    <div class="cardHeader">
+                        <h3 class="cardTitulo">
+                            Informações do perfil
+                        </h3>
+                    </div>
+                    <div class="cardContent">
+
+                        <img src="" alt="" id="fotoPerfil" data-modal="modalFotoPerfil" title="Editar foto">
+
+                        <dl class="metricasBetween">
+                            <dt>Nome:</dt>
+                            <dd id="nomeUsuario">a</dd>
+                        </dl>
+
+                        <dl class="metricasBetween">
+                            <dt>Tópicos</dt>
+                            <dd id="topicosUsuario">a</dd>
+                        </dl>
+
+                        <dl class="metricasBetween">
+                            <dt>Mensagens:</dt>
+                            <dd id="mensagensUsuario">a</dd>
+                        </dl>
+                    </div>
+
+                </div>
+
                 <div class="card">
                     <div class="cardHeader">
                         <h3 class="cardTitulo">
@@ -399,33 +188,20 @@
                         </h3>
                     </div>
                     <div class="cardContent">
-                        <!--
-                    <div class="static">
-                        <p>Tópicos:</p>
-                        <p>Mensagens:</p>
-                        <p>Membros:</p>
-                        <p>Último membro:</p>
-                    </div>
-                    <div class="static">
-                        <p id="pTopicos"></p>
-                        <p id="pMensagens"></p>
-                        <p id="pMembros"></p>
-                        <p id="pUltimoMembro"></p>
-                    </div>
--->
-                        <dl class="static">
+
+                        <dl class="estatistica">
                             <dt>Tópicos:</dt>
                             <dd id="pTopicos"></dd>
                         </dl>
-                        <dl class="static">
+                        <dl class="estatistica">
                             <dt>Mensagens:</dt>
                             <dd id="pMensagens"></dd>
                         </dl>
-                        <dl class="static">
+                        <dl class="estatistica">
                             <dt>Membros:</dt>
                             <dd id="pMembros"></dd>
                         </dl>
-                        <dl class="static">
+                        <dl class="estatistica">
                             <dt>Último membro:</dt>
                             <dd id="pUltimoMembro"></dd>
                         </dl>
@@ -459,7 +235,7 @@
                     <span>Senha:</span>
                     <input type="password" name="senha" placeholder="Sua senha">
 
-                    <button>Login</button>
+                    <button class="btn">Login</button>
                 </form>
             </div>
 
@@ -482,16 +258,38 @@
                     <span>Gênero:</span>
                     <div class="genero">
                         <input type="radio" name="genero" id="generoM" value="M">
-                        <label for="m">M</label>
+                        <label for="m">Masculino</label>
                         <input type="radio" name="genero" id="generoF" value="F">
-                        <label for="m">F</label>
+                        <label for="m">Feminino</label>
                     </div>
                     <span>Senha:</span>
                     <input type="password" name="senha" placeholder="Sua senha">
                     <span>Confirmar Senha:</span>
                     <input type="password" name="confSenha" placeholder="Confirmar senha">
 
-                    <button>Cadastrar</button>
+                    <button class="btn">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modalFotoPerfil" class="modalFundo">
+        <div class="modal">
+            <div class="modalHeader">
+                <a class="close" href="#">&times;</a>
+                <h1>Editar foto de perfil</h1>
+            </div>
+
+            <div class="modalContent">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="" alt="" width="100px" height="100px" id="fotoPerfilEditar">
+                    <span>Insira o nome ou um número de um Pokémon</span>
+                    <input type="text" id="iptPokemon" oninput="pesquisarPokemon()">
+                </div>
+                <form id="formEditarFoto" method="post" onsubmit="return editarFoto()">
+                    <input type="hidden" name="fotoUsuario" id="fotoUsuario">
+                    <button class="btn">Editar foto</button>
                 </form>
             </div>
 
@@ -499,8 +297,11 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script src="js/addElementos.js"></script>
     <script>
         carregarCategorias();
+        contarTopicos();
+        contarMsgs();
         validarSessao();
         carregarMembrosOnline();
         carregarUltimoMembro();

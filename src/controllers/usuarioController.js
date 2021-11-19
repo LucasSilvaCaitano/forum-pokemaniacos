@@ -8,6 +8,7 @@ function listar(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
+            
             res.status(204).send("Nenhum resultado encontrado!")
         }
     }).catch(
@@ -85,8 +86,8 @@ function entrar (req, res) {
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                if (resultado.length == 1) {
-                    console.log(resultado);
+                if (resultado[0].nomeUsuario != null) {
+                    console.log("aa",resultado);
                     res.json(resultado[0]);
                 } else if (resultado.length == 0) {
                     res.status(403).send("Email e/ou senha inválido(s)");
@@ -136,11 +137,19 @@ function cadastrar(req, res) {
             }
         ).catch(
             function (erro) {
+
+                console.log("sqls",erro.sqlState)
+
                 console.log(erro);
                 console.log(
                     "\nHouve um erro ao realizar o cadastro! Erro: ",
                     erro.sqlMessage
                 );
+
+                if(erro.sqlState==23000){
+                    res.status(204).json(erro.sqlMessage);
+                }
+
                 res.status(500).json(erro.sqlMessage);
             }
         );
@@ -166,6 +175,28 @@ function atualizarDataUltimaAtividade(req, res){
         }
     );
 }
+
+function atualizarFotoPerfil(req, res){
+    var idUsuario = req.params.idUsuario;
+    var fotoUsuario = req.body.fotoUsuario;
+
+    usuarioModel.atualizarFotoPerfil(idUsuario, fotoUsuario)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar update: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -173,5 +204,6 @@ module.exports = {
     listar,
     listarUsuariosOnline,
     listarQtdUsuarios,
-    atualizarDataUltimaAtividade
+    atualizarDataUltimaAtividade,
+    atualizarFotoPerfil
 }

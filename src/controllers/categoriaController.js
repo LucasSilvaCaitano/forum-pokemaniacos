@@ -6,8 +6,7 @@ function listar(req, res) {
             if (resultado.length > 0) {
                 var auxResultado = [], auxNomeCategoria, i=-1;
                 resultado.forEach(r => {
-               //     auxNomeCategoria.nomeCategoria = resultado.nomeCategoria
-                
+              
                     if(auxNomeCategoria!=r.nomeCategoria){
                         auxNomeCategoria = r.nomeCategoria
                         auxResultado.push({
@@ -23,12 +22,15 @@ function listar(req, res) {
                         somaTopicoResposta:r.somaTopicoResposta,
                         nomeUltimoTopico:r.nomeUltimoTopico,
                         autorUltimoTopico:r.autorUltimoTopico,
+                        fotoAutorUltimoTopico: r.fotoAutorUltimoTopico,
                         dataHoraUltimoTopico:r.dataHoraUltimoTopico,
 
                     });
 
                 })
-              
+                console.log("key",Object.keys(resultado));
+                console.log("resultado",Object.values(resultado));
+
                 res.status(200).json(auxResultado);
             }
         }).catch(function (erro) {

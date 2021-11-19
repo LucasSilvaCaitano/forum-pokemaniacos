@@ -1,9 +1,30 @@
-var qtdTopicos = 0, qtdMensagens = 0;
+const btnModal = document.querySelectorAll('[data-modal]');
 
-function sair(){
+btnModal.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        document.getElementById(e.target.dataset.modal).style.display = 'block';
+    })
+
+});
+
+const btnClose = document.querySelectorAll('.close');
+
+btnClose.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let modal = e.target.closest('.modalFundo');
+        modal.style.display = 'none';
+    })
+
+});
+
+
+function sair() {
     sessionStorage.clear();
 
-    window.location.href="/";
+    window.location.href = "/";
 }
 
 function cadastrarUsuario() {
@@ -14,7 +35,7 @@ function cadastrarUsuario() {
     var genero = formulario.get("genero");
     var senha = formulario.get("senha");
     var confSenha = formulario.get("confSenha");
-
+    console.log(formulario)
     if (nome == "") {
         alert("Preencha o campo nome");
     }
@@ -26,19 +47,25 @@ function cadastrarUsuario() {
     }
     else if (senha.length < 8) {
         alert("Senha requer no mínimo 8 caracteres")
-    } else if (senha != confSenha) {
+    }
+    else if (senha != confSenha) {
         alert("Senhas diferentes inseridas");
-    } else {
+    }
+    else if (email.indexOf("@") == -1 || email.indexOf(".com") == -1){
+        alert("Email invalido");
+    }
+    else {
         fetch("/usuarios/cadastrar", {
             method: "POST",
             body: formulario
 
         }).then(res => {
-            if (res.ok) {
+            if (res.ok && res.status==200) {
                 alert("Cadastro realizado com sucesso!");
 
             } else {
-                console.log(res)
+                alert("Usuário com nome ou email já cadastrado");
+
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (res) {
@@ -59,7 +86,7 @@ function logar() {
         alert("E-Mail é obrigatória")
     } else if (senha == "") {
         alert("Senha é obrigatória")
-    } else if ((email.indexOf("@") == -1 || email.indexOf(".com") == -1)) {
+    } else if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
         alert("E-Mail invalido")
     } else {
         fetch("/usuarios/autenticar", { method: 'POST', body: formulario })
@@ -67,13 +94,16 @@ function logar() {
                 if (res.ok) {
 
                     res.json().then(json => {
-
+                        console.log("aaaaa", json)
                         sessionStorage.ID_USUARIO = json.idUsuario;
                         sessionStorage.NOME_USUARIO = json.nomeUsuario;
                         sessionStorage.EMAIL_USUARIO = json.emailUsuario;
-                        
+                        sessionStorage.FOTO_USUARIO = json.fotoUsuario;
+                        sessionStorage.QTD_TOPICOS = json.qtdTopicos;
+                        sessionStorage.QTD_MENSAGENS = json.qtdMensagens;
+
                         alert("Logado com sucesso!")
-                        window.location.href="/";
+                        window.location.href = "/";
 
                     });
 
@@ -92,160 +122,19 @@ function logar() {
     return false;
 }
 
-function carregarCategorias() {
-    fetch("/categorias/listar")
-        .then(res => res.json())
+function editarFoto() {
+    var formulario = new URLSearchParams(new FormData(document.getElementById("formEditarFoto")));
+
+    fetch(`/usuarios/atualizarFotoPerfil/${sessionStorage.ID_USUARIO}`, { method: 'PUT', body: formulario })
         .then(res => {
-
-            console.log(res)
-
-            res.forEach(r => {
-                let categoria = document.createElement('div');
-                categoria.classList.add("categoria");
-
-                let tituloCategoria = document.createElement('h1');
-                tituloCategoria.classList.add('tituloCategoria');
-                tituloCategoria.innerText = r.nomeCategoria
-                
-                categoria.append(tituloCategoria)
-                console.log(categoria)
-
-                let subCategorias = document.createElement('div');
-                subCategorias.classList.add("subCategorias");
-
-                r.dadosSubCategoria.forEach(r2 => {
-                    //Criando elementos
-
-                    let card = document.createElement('div');
-                    card.classList.add('card');
-
-                    let cardHeader = document.createElement('div');
-                    cardHeader.classList.add('cardHeader');
-
-                    let cardTitulo = document.createElement('h1');
-                    cardTitulo.classList.add("cardTitulo");
-                    cardTitulo.innerText = r2.nomeSubCategoria;
-
-                    let img = document.createElement('img');
-                    img.src = `/img/${r2.fotoSubCategoria}`;
-
-                    let cardContent = document.createElement('div');
-                    cardContent.classList.add('cardContent');
-
-                    let descricaoSubCategoria = document.createElement('div');
-                    descricaoSubCategoria.classList.add('descricaoSubCategoria');
-                    descricaoSubCategoria.innerText = r2.descricaoSubCategoria;
-
-                    let metricasSubCategoria = document.createElement('div');
-                    metricasSubCategoria.classList.add('metricasSubCategoria');
-
-                    let dlTopicos = document.createElement('dl');
-
-                    let dtTopicos = document.createElement('dt');
-                    dtTopicos.innerText = 'Tópicos';
-                    
-                    let ddTopicos = document.createElement('dd');
-                    ddTopicos.innerText = r2.qtdTopicos;
-
-                    let dlMensagens = document.createElement('dl');
-
-                    let dtMensagens = document.createElement('dt');
-                    dtMensagens.innerText = 'Mensagens';
-                    
-                    let ddMensagens = document.createElement('dd');
-                    ddMensagens.innerText = r2.somaTopicoResposta;
-
-                    let cardFooter = document.createElement('div');
-                    cardFooter.classList.add('cardFooter');
-
-                    let cardFooterContent = document.createElement('div');
-                    cardFooterContent.classList.add('cardFooterContent');
-
-                    let pTopico = document.createElement('p');
-                    pTopico.innerText = r2.nomeUltimoTopico;
-
-                    let pUsuario = document.createElement('p');
-                    pUsuario.innerText = `${r2.autorUltimoTopico} - ${r2.dataHoraUltimoTopico}`;
-
-                    //Anexando elementos
-                    subCategorias.append(card);
-                    card.append(cardHeader);
-                    cardHeader.append(img);
-                    cardHeader.append(cardTitulo);
-                    card.append(cardContent);
-                    cardContent.append(descricaoSubCategoria);
-                    cardContent.append(metricasSubCategoria);
-                    metricasSubCategoria.append(dlTopicos);
-                    metricasSubCategoria.append(dlMensagens)
-                    dlTopicos.append(dtTopicos);
-                    dlTopicos.append(ddTopicos);
-                    dlMensagens.append(dtMensagens);
-                    dlMensagens.append(ddMensagens);
-                    card.append(cardFooter);
-                    cardFooter.append(cardFooterContent);
-                    cardFooterContent.append(pTopico);
-                    cardFooterContent.append(pUsuario);
-
-                    qtdTopicos += Number(r2.qtdTopicos);
-                    qtdMensagens += Number(r2.somaTopicoResposta);
-                })
-
-                categoria.append(subCategorias)
-                document.querySelector('.categorias').append(categoria)
-         
-            });
-
-            pTopicos.innerText = qtdTopicos;
-            pMensagens.innerText = qtdMensagens;
+            if (res.ok) {
+                alert("Foto atualizada com sucesso");
+                window.location.href = "/";
+                sessionStorage.FOTO_USUARIO = formulario.get("fotoUsuario")
+            } else {
+                alert("Erro")
+            }
         })
+    return false;
 }
 
-function carregarMembrosOnline() {
-    fetch("/usuarios/listarUsuariosOnline")
-        .then(res => res.json())
-        .then(res => {
-
-            res.forEach(r => {
-                console.log(r)
-                divUsuariosOnline.append(`${r.nomeUsuario},`)
-            })
-            spanQtdMembrosOnline.innerHTML = res.length
-            
-        })
-}
-
-function validarSessao() {
-    if (sessionStorage.ID_USUARIO != null) {
-        bntsPerfil.style.display = 'flex';
-        bntsLogin.style.display = 'none';
-        fetch(`/usuarios/atualizarDataUltimaAtividade/${sessionStorage.ID_USUARIO}`, { method: 'PUT'})
-            .then(res => {
-
-                console.log("aa",res)
-            }).catch(e=>console.log("erro", e))
-
-    }else{
-        
-    }
-}
-
-function carregarQtdMembros(){
-    fetch("/usuarios/listarQtdUsuarios")
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            pMembros.innerText = res[0].qtdUsuarios;
-            
-        })
-}
-
-function carregarUltimoMembro() {
-    fetch("/usuarios/exibirUltimoUsuario")
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-
-            pUltimoMembro.innerText = res[0].nomeUsuario
-
-        })
-}
