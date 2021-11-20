@@ -51,7 +51,7 @@ function cadastrarUsuario() {
     else if (senha != confSenha) {
         alert("Senhas diferentes inseridas");
     }
-    else if (email.indexOf("@") == -1 || email.indexOf(".com") == -1){
+    else if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
         alert("Email invalido");
     }
     else {
@@ -60,7 +60,7 @@ function cadastrarUsuario() {
             body: formulario
 
         }).then(res => {
-            if (res.ok && res.status==200) {
+            if (res.ok && res.status == 200) {
                 alert("Cadastro realizado com sucesso!");
 
             } else {
@@ -138,8 +138,8 @@ function editarFoto() {
     return false;
 }
 
-function cadastrarTopico(){
-    
+function cadastrarTopico() {
+
     var formulario = new URLSearchParams(new FormData(document.getElementById("formAddTopico")));
 
     var tituloTopico = formulario.get("tituloTopico");
@@ -154,7 +154,7 @@ function cadastrarTopico(){
         alert("Titulo é obrigatório")
     } else if (textoTopico == "") {
         alert("Texto é obrigatório")
-    }else {
+    } else {
         fetch(`/topicos/cadastrar/${idUsuario}/${idSubCategoria}`, { method: 'POST', body: formulario })
             .then(res => {
                 if (res.ok) {
@@ -162,7 +162,45 @@ function cadastrarTopico(){
                     alert("Tópico adicionado com sucesso!")
                     window.location.href = url;
 
-                } else {
+                }
+                else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    res.text().then(texto => {
+                        console.error(texto);
+
+                    });
+                }
+            })
+    }
+
+    return false;
+}
+
+function cadastrarResposta() {
+    var formulario = new URLSearchParams(new FormData(document.getElementById("formAddResposta")));
+
+    var textoResposta = formulario.get("textoResposta");
+
+    var url = window.location.href;
+    var indexId = url.indexOf('ico=') + 4;
+    var idTopico = url.substr(indexId);
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    if (textoResposta == "") {
+        alert("Resposta é obrigatória")
+    }
+    else {
+        fetch(`/respostas/cadastrar/${idUsuario}/${idTopico}`, { method: 'POST', body: formulario })
+            .then(res => {
+                if (res.ok) {
+
+                    alert("Resposta adicionada com sucesso!")
+                    window.location.href = url;
+
+                }
+                else {
 
                     console.log("Houve um erro ao tentar realizar o login!");
 

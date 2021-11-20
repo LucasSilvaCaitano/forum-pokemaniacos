@@ -12,6 +12,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var categoriaRouter = require("./src/routes/categorias");
 var topicoRouter = require("./src/routes/topicos");
+var respostaRouter = require("./src/routes/respostas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,6 +25,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/categorias", categoriaRouter);
 app.use("/topicos", topicoRouter);
+app.use("/respostas", respostaRouter);
 
 app.listen(PORTA, function() {
     console.log(`Servidor do site está rodando rodando: http://localhost:${PORTA} \n
