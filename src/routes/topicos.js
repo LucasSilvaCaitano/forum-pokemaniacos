@@ -3,7 +3,7 @@ var router = express.Router();
 
 var topicoController = require("../controllers/topicoController");
 
-router.get("/listar", function(req, res){
+router.get("/listar/:idCategoria", function(req, res){
     topicoController.listar(req, res);
 })
 
@@ -15,8 +15,12 @@ router.get("/contarMsg", function(req, res) {
     topicoController.contarMsg(req, res);
 });
 
-router.get("/listarRespostas", function(req, res) {
+router.get("/listarRespostas/:idTopico", function(req, res) {
     topicoController.listarRespostas(req, res);
+});
+
+router.post("/cadastrar/:idUsuario/:idSubCategoria", function(req, res) {
+    topicoController.cadastrar(req, res);
 });
   
 module.exports = router;

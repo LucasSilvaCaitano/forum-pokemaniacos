@@ -24,7 +24,7 @@
                 <div class="navs">
                     <ul class="navbar navLeft">
                         <li><a href="index.html">Inicio</a></li>
-                        <li><a href="forum.html">Fórum</a></li>
+                        <!--        <li><a href="forum.html">Fórum</a></li>-->
                         <li><a href="index.html">Regras</a></li>
                         <li><a href="membros.html">Membros</a></li>
                     </ul>
@@ -306,6 +306,18 @@
         carregarMembrosOnline();
         carregarUltimoMembro();
         carregarQtdMembros();
+
+        if (sessionStorage.ID_USUARIO != null) {
+
+            perfil.style.display = 'flex';
+            fotoPerfil.src = sessionStorage.FOTO_USUARIO;
+            fotoPerfilEditar.src = sessionStorage.FOTO_USUARIO;
+            nomeUsuario.innerText = sessionStorage.NOME_USUARIO;
+            topicosUsuario.innerText = sessionStorage.QTD_TOPICOS;
+            mensagensUsuario.innerText = sessionStorage.QTD_MENSAGENS;
+            
+
+        }
     </script>
 </body>
 

@@ -25,32 +25,58 @@ function contar() {
 
 function listarRespostas(idTopico) {
     var instrucao = `
-        select tituloTopico,
+        SELECT 
+        tituloTopico,
         textoTopico,
-        dataHoraTopico,
-        usuario.*,
-        (select(
-            select count(idTopico) from topico
-            where fkUsuario = 4)+(
-                select count(idResposta) from resposta
-                where fkUsuario = usuario.idUsuario
-            )
-        )
-        as qtdMensagensAutorTopico,
-        textoResposta, dataHoraResposta, autorResposta.*,
-        (select(
-            select count(idTopico) from topico
-            where fkUsuario = 4)+(
-                select count(idResposta) from resposta
-                where fkUsuario = autorResposta.idUsuario
-            )
-        )
-        as qtdMensagensAutorResposta
-        from topico
-        join usuario on fkUsuario = idUsuario
-        left join resposta on idTopico = fkTopico
-        left join usuario as autorResposta on resposta.fkUsuario = autorResposta.idUsuario
-        where idTopico = ${idTopico};
+        DATE_FORMAT(dataHoraTopico, '%d/%m/%Y') AS dataHoraTopico,
+        usuario.idUsuario,
+        usuario.nomeUsuario,
+        usuario.fotoUsuario,
+        usuario.generoUsuario,
+        DATE_FORMAT(usuario.dataCadastro, '%d/%m/%Y') AS dataCadastroAutor,
+        (SELECT 
+                (SELECT 
+                            COUNT(idTopico)
+                        FROM
+                            topico
+                        WHERE
+                            fkUsuario = 4) + (SELECT 
+                            COUNT(idResposta)
+                        FROM
+                            resposta
+                        WHERE
+                            fkUsuario = usuario.idUsuario)
+            ) AS qtdMensagensAutorTopico,
+        textoResposta,
+        DATE_FORMAT(dataHoraResposta, '%d/%m/%Y') AS dataHoraResposta,
+        autorResposta.idUsuario AS idAutorResposta,
+        autorResposta.nomeUsuario AS nomeAutorResposta,
+        autorResposta.fotoUsuario AS fotoAutorResposta,
+        autorResposta.generoUsuario AS generoAutorResposta,
+        DATE_FORMAT(autorResposta.dataCadastro, '%d/%m/%Y') AS dataCadastroAutorResposta,
+        (SELECT 
+                (SELECT 
+                            COUNT(idTopico)
+                        FROM
+                            topico
+                        WHERE
+                            fkUsuario = 4) + (SELECT 
+                            COUNT(idResposta)
+                        FROM
+                            resposta
+                        WHERE
+                            fkUsuario = autorResposta.idUsuario)
+            ) AS qtdMensagensAutorResposta
+        FROM
+            topico
+                JOIN
+            usuario ON fkUsuario = idUsuario
+                LEFT JOIN
+            resposta ON idTopico = fkTopico
+                LEFT JOIN
+            usuario AS autorResposta ON resposta.fkUsuario = autorResposta.idUsuario
+        WHERE
+            idTopico = ${idTopico};
     `;
     return database.executar(instrucao);
 }
@@ -70,9 +96,20 @@ function contarMsg(){
     return database.executar(instrucao);
 }
 
+function cadstrar(titulo, texto, idUsuario, idSubCategoria){
+    var instrucao = `
+        insert into topico (tituloTopico, textoTopico, fkUsuario, fkSubCategoria)
+        VALUES
+        ('${titulo}', '${texto}', ${idUsuario}, ${idSubCategoria});
+    `;
+
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listar,
     contar,
     contarMsg,
-    listarRespostas
+    listarRespostas,
+    cadstrar
 }

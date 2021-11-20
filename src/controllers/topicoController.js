@@ -1,7 +1,7 @@
 var topicoModel = require("../models/topicoModel");
 
 function listar(req, res) {
-    let idCategoria = 2;
+    let idCategoria = req.params.idCategoria;
     topicoModel.listar(idCategoria)
         .then(function (resultado) {
             if (resultado.length > 0) {
@@ -14,9 +14,8 @@ function listar(req, res) {
                     }
                     return auxR;
                 })
-                console.log(" aux", auxResultado);
 
-                res.status(200).json(resultado);
+                res.status(200).json(auxResultado);
             } else {
                 res.status(204).send("Nenhum resultado encontrado!")
             }
@@ -64,18 +63,18 @@ function contarMsg(req, res) {
 }
 
 function listarRespostas(req, res) {
-    let idTopico = 5;
+    let idTopico = req.params.idTopico;
     topicoModel.listarRespostas(idTopico)
         .then(function (resultado) {
             if (resultado.length > 0) {
-                let auxResultado = resultado.map((r, i)=>{
+                let auxResultado = resultado.map((r) => {
                     let auxR = r;
-                    if(i==0){
-                        
-                    }
+                    auxR.generoUsuario = auxR.generoUsuario=="M"?"Masculino":"Feminino"
+                    auxR.generoAutorResposta = auxR.generoAutorResposta=="M"?"Masculino":"Feminino"
+                    return auxR;
                 })
-                
-                res.status(200).json(resultado);
+
+                res.status(200).json(auxResultado);
             } else {
                 res.status(204).send("Nenhum resultado encontrado!")
             }
@@ -88,9 +87,41 @@ function listarRespostas(req, res) {
         );
 }
 
+function cadastrar(req, res){
+    let titulo = req.body.tituloTopico;
+    let texto = req.body.textoTopico;
+    let idSubCategoria = req.params.idSubCategoria;
+    let idUsuario = req.params.idUsuario;
+
+    topicoModel.cadstrar(titulo, texto, idUsuario, idSubCategoria)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+
+                console.log("sqls",erro.sqlState)
+
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+
+                if(erro.sqlState==23000){
+                    res.status(204).json(erro.sqlMessage);
+                }
+
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     listar,
     contar,
     listarRespostas,
-    contarMsg
+    contarMsg,
+    cadastrar
 }

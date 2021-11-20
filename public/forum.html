@@ -24,7 +24,7 @@
                 <div class="navs">
                     <ul class="navbar navLeft">
                         <li><a href="index.html">Inicio</a></li>
-                        <li><a href="index.html">Fórum</a></li>
+                         <!--        <li><a href="forum.html">Fórum</a></li>-->
                         <li><a href="index.html">Regras</a></li>
                         <li><a href="membros.html">Membros</a></li>
                     </ul>
@@ -47,7 +47,7 @@
     <div class="main">
 
         <div class="container">
-            <button class="btn" data-modal="modalAddTopico">Novo tópico</button>
+            <button id="btnAddTopico" class="btn" data-modal="modalAddTopico" style="display: none;">Novo tópico</button>
             <div class="topicos">
             <!--
                 <div class="topico">
@@ -212,11 +212,11 @@
             </div>
 
             <div class="modalContent">
-                <form id="formAddTopico" method="post">
+                <form id="formAddTopico" method="post" onsubmit="return cadastrarTopico()">
                     <span>Título</span>
                     <input type="text" name="tituloTopico" placeholder="Título do tópico">
                     <span>Texto</span>
-                    <textarea name="textoTopico" cols="30" rows="10"></textarea>
+                    <textarea name="textoTopico"></textarea>
 
                     <button class="btn">Adicionar tópico</button>
                 </form>
@@ -229,10 +229,12 @@
     <script src="js/addElementos.js"></script>
 
     <script>
-
         listarTopicos();
         validarSessao();
+        if (sessionStorage.ID_USUARIO != null) {
+            btnAddTopico.style.display='block';
 
+        } 
     </script>
 </body>
 

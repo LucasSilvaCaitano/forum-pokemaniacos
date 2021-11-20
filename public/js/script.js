@@ -138,3 +138,41 @@ function editarFoto() {
     return false;
 }
 
+function cadastrarTopico(){
+    
+    var formulario = new URLSearchParams(new FormData(document.getElementById("formAddTopico")));
+
+    var tituloTopico = formulario.get("tituloTopico");
+    var textoTopico = formulario.get("textoTopico");
+
+    var url = window.location.href;
+    var indexId = url.indexOf('ria') + 4;
+    var idSubCategoria = url.substr(indexId);
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    if (tituloTopico == "") {
+        alert("Titulo é obrigatório")
+    } else if (textoTopico == "") {
+        alert("Texto é obrigatório")
+    }else {
+        fetch(`/topicos/cadastrar/${idUsuario}/${idSubCategoria}`, { method: 'POST', body: formulario })
+            .then(res => {
+                if (res.ok) {
+
+                    alert("Tópico adicionado com sucesso!")
+                    window.location.href = url;
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    res.text().then(texto => {
+                        console.error(texto);
+
+                    });
+                }
+            })
+    }
+
+    return false;
+}
