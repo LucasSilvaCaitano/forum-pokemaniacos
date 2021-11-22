@@ -7,119 +7,124 @@ function carregarCategorias() {
     fetch("/categorias/listar")
         .then(res => res.json())
         .then(res => {
-
-            console.log(res)
-
-            let categoria = document.createElement('div');
-            categoria.classList.add("categoria");
-
-            let tituloCategoria = document.createElement('h1');
-            tituloCategoria.classList.add('tituloCategoria');
-            tituloCategoria.innerText = res[0].nomeCategoria
-
-            categoria.append(tituloCategoria)
-            console.log(categoria)
-
-            let subCategorias = document.createElement('div');
-            subCategorias.classList.add("subCategorias");
-
+            
             res.forEach(r => {
-                //Criando elementos
+                var categoria = document.createElement('div');
+                categoria.classList.add("categoria");
 
-                let card = document.createElement('div');
-                card.classList.add('card');
+                let tituloCategoria = document.createElement('h1');
+                tituloCategoria.classList.add('tituloCategoria');
+                tituloCategoria.innerText = r.nomeCategoria
 
-                let cardHeader = document.createElement('div');
-                cardHeader.classList.add('cardHeader');
+                categoria.append(tituloCategoria)
+                console.log(categoria)
 
-                let cardTitulo = document.createElement('h1');
-                cardTitulo.classList.add("cardTitulo");
+                let subCategorias = document.createElement('div');
+                subCategorias.classList.add("subCategorias");
 
-                let a = document.createElement('a');
-                a.href = `/forum.html?idSubCategoria=${r.idSCategoria}`;
-                a.innerText = r.nomeSubCategoria;
+                r.dadosSubCategoria.forEach(r2 => {
 
-                let img = document.createElement('img');
-                img.src = `${r.fotoSubCategoria}`;
+                    let card = document.createElement('div');
+                    card.classList.add('card');
+    
+                    let cardHeader = document.createElement('div');
+                    cardHeader.classList.add('cardHeader');
+    
+                    let cardTitulo = document.createElement('h1');
+                    cardTitulo.classList.add("cardTitulo");
+    
+                    let a = document.createElement('a');
+                    a.href = `/forum.html?idSubCategoria=${r2.idSCategoria}`;
+                    a.innerText = r2.nomeSubCategoria;
+    
+                    let img = document.createElement('img');
+                    img.src = `${r2.fotoSubCategoria}`;
+    
+                    let cardContent = document.createElement('div');
+                    cardContent.classList.add('cardContent');
+    
+                    let descricaoSubCategoria = document.createElement('div');
+                    descricaoSubCategoria.classList.add('descricaoSubCategoria');
+                    descricaoSubCategoria.innerText = r2.descricaoSubCategoria;
+    
+                    let metricasSubCategoria = document.createElement('div');
+                    metricasSubCategoria.classList.add('metricasSubCategoria');
+    
+                    let dlTopicos = document.createElement('dl');
+    
+                    let dtTopicos = document.createElement('dt');
+                    dtTopicos.innerText = 'Tópicos';
+    
+                    let ddTopicos = document.createElement('dd');
+                    ddTopicos.innerText = r2.qtdTopicos;
+    
+                    let dlMensagens = document.createElement('dl');
+    
+                    let dtMensagens = document.createElement('dt');
+                    dtMensagens.innerText = 'Mensagens';
+    
+                    let ddMensagens = document.createElement('dd');
+                    ddMensagens.innerText = r2.somaTopicoResposta;
+    
+                    let cardFooter = document.createElement('div');
+                    cardFooter.classList.add('cardFooter');
+    
+                    let cardFooterContent = document.createElement('div');
+                    cardFooterContent.classList.add('cardFooterContent');
+    
+                    let ultimoTopico = document.createElement('div');
+                    ultimoTopico.classList.add('ultimoTopico');
+    
+                    let topicoUsuario = document.createElement('div');
+                    topicoUsuario.classList.add('topicoUsuario');
+    
+                    let imgPerfil = document.createElement('img');
+                    imgPerfil.src = r2.fotoAutorUltimoTopico;
+    
+                    let pTopico = document.createElement('p');
+                    pTopico.innerText = r2.nomeUltimoTopico;
+    
+                    let pUsuario = document.createElement('p');
+                    pUsuario.innerText = `${r2.autorUltimoTopico} - ${r2.dataHoraUltimoTopico}`;
+    
+                    subCategorias.append(card);
+                    card.append(cardHeader);
+                    cardHeader.append(img);
+                    cardHeader.append(cardTitulo);
+                    cardTitulo.append(a);
+                    card.append(cardContent);
+                    cardContent.append(descricaoSubCategoria);
+                    cardContent.append(metricasSubCategoria);
+                    metricasSubCategoria.append(dlTopicos);
+                    metricasSubCategoria.append(dlMensagens)
+                    dlTopicos.append(dtTopicos);
+                    dlTopicos.append(ddTopicos);
+                    dlMensagens.append(dtMensagens);
+                    dlMensagens.append(ddMensagens);
+                    card.append(cardFooter);
+                    cardFooter.append(cardFooterContent);
+                    cardFooterContent.append(ultimoTopico);
+    
+                    if(r2.autorUltimoTopico==null){
+                        ultimoTopico.innerText = "Nenhum tópico cadastrado"
+                    }
+                    else{
+                        ultimoTopico.append(imgPerfil)
+                        ultimoTopico.append(topicoUsuario)
+                    }
+    
+                    topicoUsuario.append(pTopico);
+                    topicoUsuario.append(pUsuario);
 
-                let cardContent = document.createElement('div');
-                cardContent.classList.add('cardContent');
+                    categoria.append(subCategorias)
 
-                let descricaoSubCategoria = document.createElement('div');
-                descricaoSubCategoria.classList.add('descricaoSubCategoria');
-                descricaoSubCategoria.innerText = r.descricaoSubCategoria;
-
-                let metricasSubCategoria = document.createElement('div');
-                metricasSubCategoria.classList.add('metricasSubCategoria');
-
-                let dlTopicos = document.createElement('dl');
-
-                let dtTopicos = document.createElement('dt');
-                dtTopicos.innerText = 'Tópicos';
-
-                let ddTopicos = document.createElement('dd');
-                ddTopicos.innerText = r.qtdTopicos;
-
-                let dlMensagens = document.createElement('dl');
-
-                let dtMensagens = document.createElement('dt');
-                dtMensagens.innerText = 'Mensagens';
-
-                let ddMensagens = document.createElement('dd');
-                ddMensagens.innerText = r.somaTopicoResposta;
-
-                let cardFooter = document.createElement('div');
-                cardFooter.classList.add('cardFooter');
-
-                let cardFooterContent = document.createElement('div');
-                cardFooterContent.classList.add('cardFooterContent');
-
-                let ultimoTopico = document.createElement('div');
-                ultimoTopico.classList.add('ultimoTopico');
-
-                let topicoUsuario = document.createElement('div');
-                topicoUsuario.classList.add('topicoUsuario');
-
-                let imgPerfil = document.createElement('img');
-                imgPerfil.src = r.fotoAutorUltimoTopico;
-
-                let pTopico = document.createElement('p');
-                pTopico.innerText = r.nomeUltimoTopico;
-
-                let pUsuario = document.createElement('p');
-                pUsuario.innerText = `${r.autorUltimoTopico} - ${r.dataHoraUltimoTopico}`;
-
-                //Anexando elementos
-                subCategorias.append(card);
-                card.append(cardHeader);
-                cardHeader.append(img);
-                cardHeader.append(cardTitulo);
-                cardTitulo.append(a);
-                card.append(cardContent);
-                cardContent.append(descricaoSubCategoria);
-                cardContent.append(metricasSubCategoria);
-                metricasSubCategoria.append(dlTopicos);
-                metricasSubCategoria.append(dlMensagens)
-                dlTopicos.append(dtTopicos);
-                dlTopicos.append(ddTopicos);
-                dlMensagens.append(dtMensagens);
-                dlMensagens.append(ddMensagens);
-                card.append(cardFooter);
-                cardFooter.append(cardFooterContent);
-                cardFooterContent.append(ultimoTopico);
-                ultimoTopico.append(imgPerfil)
-                ultimoTopico.append(topicoUsuario)
-
-
-                topicoUsuario.append(pTopico);
-                topicoUsuario.append(pUsuario);
+                    document.querySelector('.categorias').append(categoria)
+    
+                })
 
             })
 
-            categoria.append(subCategorias)
-            document.querySelector('.categorias').append(categoria)
 
-            console.log(categoria)
 
         })
 }
@@ -194,6 +199,8 @@ function listarTopicos() {
         .then(res => res.json())
         .then(res => {
             console.log("aa", res)
+            nomeCategoria.innerText = res[0].nomeCategoria;
+            nomeSubCategoria.innerText = res[0].nomeSubCategoria;
             res.forEach(r => {
 
                 let topico = document.createElement('div');
@@ -228,14 +235,6 @@ function listarTopicos() {
                 let ddRespostas = document.createElement("dd");
                 ddRespostas.innerText = r.qtdRespostas;
 
-                let dlVisualizacoes = document.createElement("dl");
-                dlVisualizacoes.classList.add("metricasBetween");
-
-                let dtVisualizacoes = document.createElement("dt");
-                dtVisualizacoes.innerText = "Visualizações";
-                let ddVisualizacoes = document.createElement("dd");
-                ddVisualizacoes.innerText = 4;
-
                 let autorResposta = document.createElement('div');
                 autorResposta.classList.add('autorResposta');
 
@@ -262,9 +261,6 @@ function listarTopicos() {
                 metricasTopico.append(dlRespostas);
                 dlRespostas.append(dtRespostas);
                 dlRespostas.append(ddRespostas);
-                metricasTopico.append(dlVisualizacoes);
-                dlVisualizacoes.append(dtVisualizacoes);
-                dlVisualizacoes.append(ddVisualizacoes);
                 topico.append(autorResposta);
                 autorResposta.append(divUltimaResposta);
                 divUltimaResposta.append(pUltimaResposta);
@@ -299,6 +295,10 @@ function listarRespostas() {
     fetch(`/topicos/listarRespostas/${idTopico}`)
         .then(res => res.json())
         .then(res => {
+
+            nomeCategoria.innerText = res[0].nomeCategoria;
+            nomeSubCategoria.innerText = res[0].nomeSubCategoria;
+            nomeTopico.innerText = res[0].tituloTopico;
             
             let tituloTopico = document.createElement('h1');
             tituloTopico.classList.add('tituloTopico');

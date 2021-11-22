@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function listar(idSubCategoria) {
 
-    var instrucao = `select idTopico, tituloTopico, dataHoraTopico,
+    var instrucao = `select nomeCategoria, nomeSubCategoria, idTopico, tituloTopico, dataHoraTopico,
     autorTopico.nomeUsuario as nomeAutorTopico,
     autorTopico.fotoUsuario as fotoAutorTopico,
     DATE_FORMAT(max(dataHoraTopico), "%d/%m/%Y") as dataHoraTopico,
@@ -10,6 +10,8 @@ function listar(idSubCategoria) {
     (select nomeUsuario from usuario join resposta on idUsuario = fkUsuario where dataHoraResposta = (select max(dataHoraResposta) from resposta where fkTopico = idTopico)) as autorRespostaUltimo,
     (select fotoUsuario from usuario join resposta on idUsuario = fkUsuario where dataHoraResposta = (select max(dataHoraResposta) from resposta where fkTopico = idTopico)) as fotoAutorRespostaUltimo,
     DATE_FORMAT(max(dataHoraResposta), "%d/%m/%Y") as dataHoraResposta from topico
+    join subCategoria ON fkSubCategoria = idSubCategoria
+    join categoria ON fkCategoria = idCategoria
     join usuario as autorTopico on fkUsuario = autorTopico.idUsuario
     left join resposta on idTopico = fkTopico
     left join usuario as autorResposta on resposta.fkUsuario = autorResposta.idUsuario
@@ -25,7 +27,9 @@ function contar() {
 
 function listarRespostas(idTopico) {
     var instrucao = `
-        SELECT 
+        SELECT
+        nomeCategoria,
+        nomeSubCategoria,
         tituloTopico,
         textoTopico,
         DATE_FORMAT(dataHoraTopico, '%d/%m/%Y') AS dataHoraTopico,
@@ -69,6 +73,10 @@ function listarRespostas(idTopico) {
             ) AS qtdMensagensAutorResposta
         FROM
             topico
+                JOIN
+            subCategoria ON fkSubCategoria = idSubCategoria
+                JOIN
+            categoria ON fkCategoria = idCategoria
                 JOIN
             usuario ON fkUsuario = idUsuario
                 LEFT JOIN

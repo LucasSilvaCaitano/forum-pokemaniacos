@@ -39,7 +39,7 @@
                 </div>
             </div>
             <h1 class="msg">O lugar onde os treinadores se reunem</h1>
-            <h1 class="msg">Faça já o seu <a href="#modalCadastro">cadastro</a> e junte-se há mais de 14054 treinadores
+            <h1 class="msg">Você está em <span id="nomeCategoria"></span> > <span id="nomeSubCategoria"></span> > <p id="nomeTopico" style="font-weight: bolder;"></p>
             </h1>
         </div>
     </div>
@@ -132,7 +132,7 @@
           
     </div>
 
-    <div class="fieldAddResposta">
+    <div class="fieldAddResposta" style="display: none;">
         <div class="container">
             <form id="formAddResposta" onsubmit=" return cadastrarResposta()">
                 <button class="btn">Publicar</button>
@@ -207,7 +207,11 @@
     <script>
         listarRespostas();
         validarSessao();
-        
+        //fieldAddResposta
+        if (sessionStorage.ID_USUARIO != null) {
+            document.querySelector('.fieldAddResposta').style.display='block';
+
+        } 
     </script>
 </body>
 

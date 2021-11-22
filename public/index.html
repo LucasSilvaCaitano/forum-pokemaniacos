@@ -39,11 +39,14 @@
                 </div>
             </div>
             <h1 class="msg">O lugar onde os treinadores se reunem</h1>
-            <h1 class="msg">Faça já o seu <a href="#modalCadastro">cadastro</a> e junte-se há mais de 14054 treinadores
+            <h1 class="msg" id="msgBemVindo">Faça já o seu <a data-modal="modalCadastro" style="text-decoration: underline; cursor: pointer;">cadastro</a> e junte-se há mais de 14054 treinadores
             </h1>
         </div>
-    </div>
-
+    </div><!--
+    <div style="padding: 15px 25px; background-color: var(--corSecundaria); color: white; position: fixed; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center;">
+        <img src="https://c.tenor.com/fSsxftCb8w0AAAAi/pikachu-running.gif" alt="" style="width: 50px; height: 50px; transform: scaleX(-1);"> 
+        Logado com sucesso!
+    </div>-->
     <div class="main">
 
         <div class="container">
@@ -309,6 +312,8 @@
 
         if (sessionStorage.ID_USUARIO != null) {
 
+            document.getElementById('msgBemVindo').innerHTML= `Bem vindo ${sessionStorage.NOME_USUARIO}`;
+
             perfil.style.display = 'flex';
             fotoPerfil.src = sessionStorage.FOTO_USUARIO;
             fotoPerfilEditar.src = sessionStorage.FOTO_USUARIO;
@@ -316,7 +321,6 @@
             topicosUsuario.innerText = sessionStorage.QTD_TOPICOS;
             mensagensUsuario.innerText = sessionStorage.QTD_MENSAGENS;
             
-
         }
     </script>
 </body>

@@ -74,8 +74,7 @@ values
 (null, 'Geral'),
 (null, 'Jogos'),
 (null, 'Anime e mangá'),
-(null, 'TCG'),
-(null, 'Fanworks');
+(null, 'TCG');
 
 insert into subCategoria
 values
@@ -84,7 +83,7 @@ values
 (null, 'Boas vindas', 'Novo no fórum? apresente-se aqui', '/img/foto.jpg', 1),
 (null, 'Sugestões', 'Tem uma idéia do que acrescentar no fórum? poste aqui', '/img/foto.jpg', 1),
 -- Jogos
-(null, 'Geração 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
+(null, 'Geração 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/pallet.jpg', 2),
 (null, 'Geração 2','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
 (null, 'Geração 3','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
 (null, 'Geração 4','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
@@ -93,17 +92,14 @@ values
 (null, 'Geração 7','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
 (null, 'Geração 8','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
 (null, 'Pokémon GO','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Pokémon Unite','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
+(null, 'Pokémon Unite','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/unite.jpg', 2),
 (null, 'Mystery Dungeon','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/mysteryDungeon.png', 2),
-(null, 'Outros spin-offs','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
+(null, 'Outros spin-offs','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/colosseum.jpg', 2),
 -- Anime e mangá
 (null, 'Anime','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 3),
 (null, 'Mangá','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 3),
 -- TCG
-(null, 'TCG','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 4),
--- Fanworks
-(null, 'Fangames','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 5),
-(null, 'Fanarts','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 5);
+(null, 'TCG','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 4);
 
 select * from usuario;
 
@@ -156,7 +152,7 @@ values
 select * from topico
 join usuario on fkUsuario = idUsuario;
 
-select * from resposta where idResposta;
+select * from resposta;
 
 select idUsuario, nomeUsuario, emailUsuario, fotoUsuario, count(distinct idTopico) as qtdTopicos, count(idResposta) as qtdMensagens from usuario
 left join topico on topico.fkUsuario = idUsuario
@@ -252,31 +248,115 @@ FROM
     resposta ON idTopico = fkTopico
 GROUP BY idSubCategoria;
     
-    select idTopico, tituloTopico, dataHoraTopico,
-    autorTopico.nomeUsuario as nomeAutorTopico,
+    SELECT 
+    nomeCategoria,
+    nomeSubCategoria,
+    idTopico,
+    tituloTopico,
     dataHoraTopico,
-    count(idResposta) as qtdRespostas,
-    textoResposta,
-    (select nomeUsuario from usuario join resposta on idUsuario = fkUsuario where dataHoraResposta = (select max(dataHoraResposta) from resposta where fkTopico = idTopico)) as autorRespostaUltimo,
-    DATE_FORMAT(max(dataHoraResposta), "%d/%m/%Y'") as dataHoraResposta from topico
-    join usuario as autorTopico on fkUsuario = autorTopico.idUsuario
-    left join resposta on idTopico = fkTopico
-    left join usuario as autorResposta on resposta.fkUsuario = autorResposta.idUsuario
-    where fkSubCategoria = 2
-    group by idTopico;
+    autorTopico.nomeUsuario AS nomeAutorTopico,
+    autorTopico.fotoUsuario AS fotoAutorTopico,
+    DATE_FORMAT(MAX(dataHoraTopico), '%d/%m/%Y') AS dataHoraTopico,
+    COUNT(idResposta) AS qtdRespostas,
+    (SELECT 
+            nomeUsuario
+        FROM
+            usuario
+                JOIN
+            resposta ON idUsuario = fkUsuario
+        WHERE
+            dataHoraResposta = (SELECT 
+                    MAX(dataHoraResposta)
+                FROM
+                    resposta
+                WHERE
+                    fkTopico = idTopico)) AS autorRespostaUltimo,
+    (SELECT 
+            fotoUsuario
+        FROM
+            usuario
+                JOIN
+            resposta ON idUsuario = fkUsuario
+        WHERE
+            dataHoraResposta = (SELECT 
+                    MAX(dataHoraResposta)
+                FROM
+                    resposta
+                WHERE
+                    fkTopico = idTopico)) AS fotoAutorRespostaUltimo,
+    DATE_FORMAT(MAX(dataHoraResposta), '%d/%m/%Y') AS dataHoraResposta
+FROM
+    topico
+        JOIN
+    subCategoria ON fkSubCategoria = idSubCategoria
+        JOIN
+    categoria ON fkCategoria = idCategoria
+        JOIN
+    usuario AS autorTopico ON fkUsuario = autorTopico.idUsuario
+        LEFT JOIN
+    resposta ON idTopico = fkTopico
+        LEFT JOIN
+    usuario AS autorResposta ON resposta.fkUsuario = autorResposta.idUsuario
+GROUP BY idTopico;
     
-    select tituloTopico,
+    -- Tópico e seus usuários e respostas
+    SELECT
+    nomeCategoria,
+    nomeSubCategoria,
+    tituloTopico,
     textoTopico,
-    dataHoraTopico,
-    usuario.*,
-	(select (select count(idTopico) from topico where fkUsuario = 4)+(select count(idResposta) from resposta where fkUsuario = usuario.idUsuario)) as qtdMensagensAutorTopico,
-    textoResposta, dataHoraResposta, autorResposta.*,
-    (select (select count(idTopico) from topico where fkUsuario = 4)+(select count(idResposta) from resposta where fkUsuario = autorResposta.idUsuario)) as qtdMensagensAutorResposta
-    from topico
-    join usuario on fkUsuario = idUsuario
-    left join resposta on idTopico = fkTopico
-    left join usuario as autorResposta on resposta.fkUsuario = autorResposta.idUsuario
-    where idTopico = 5;
+    DATE_FORMAT(dataHoraTopico, '%d/%m/%Y') AS dataHoraTopico,
+    usuario.idUsuario,
+    usuario.nomeUsuario,
+    usuario.fotoUsuario,
+    usuario.generoUsuario,
+    (SELECT 
+            (SELECT 
+                        COUNT(idTopico)
+                    FROM
+                        topico
+                    WHERE
+                        fkUsuario = 4) + (SELECT 
+                        COUNT(idResposta)
+                    FROM
+                        resposta
+                    WHERE
+                        fkUsuario = usuario.idUsuario)
+        ) AS qtdMensagensAutorTopico,
+    textoResposta,
+    DATE_FORMAT(dataHoraResposta, '%d/%m/%Y') AS dataHoraResposta,
+    autorResposta.idUsuario AS idAutorResposta,
+    autorResposta.nomeUsuario AS nomeAutorResposta,
+    autorResposta.fotoUsuario AS fotoAutorResposta,
+    autorResposta.generoUsuario AS generoAutorResposta,
+    DATE_FORMAT(autorResposta.dataCadastro, '%d/%m/%Y') AS dataCadastroAutorResposta,
+    (SELECT 
+            (SELECT 
+                        COUNT(idTopico)
+                    FROM
+                        topico
+                    WHERE
+                        fkUsuario = 4) + (SELECT 
+                        COUNT(idResposta)
+                    FROM
+                        resposta
+                    WHERE
+                        fkUsuario = autorResposta.idUsuario)
+        ) AS qtdMensagensAutorResposta
+FROM
+    topico
+		JOIN
+    subCategoria ON fkSubCategoria = idSubCategoria
+		JOIN
+    categoria ON fkCategoria = idCategoria
+        JOIN
+    usuario ON fkUsuario = idUsuario
+        LEFT JOIN
+    resposta ON idTopico = fkTopico
+        LEFT JOIN
+    usuario AS autorResposta ON resposta.fkUsuario = autorResposta.idUsuario
+WHERE
+    idTopico = 3;
     
     select count(idTopico) from topico
     where fkUsuario = 1;
@@ -295,4 +375,3 @@ GROUP BY idSubCategoria;
     select count(idTopico) from topico where fkUsuario = 2;
     
         select count(idResposta) from resposta where fkUsuario = 2;
-        
