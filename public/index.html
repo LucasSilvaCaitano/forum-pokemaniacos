@@ -25,21 +25,22 @@
                     <ul class="navbar navLeft">
                         <li><a href="index.html">Inicio</a></li>
                         <!--        <li><a href="forum.html">Fórum</a></li>-->
-                        <li><a href="index.html">Regras</a></li>
-                        <li><a href="membros.html">Membros</a></li>
+                    <!--    <li><a href="index.html">Regras</a></li>-->
+                        <!--<li><a href="membros.html">Membros</a></li>-->
                     </ul>
                     <ul class="navbar navRight" id="bntsLogin">
                         <li><a href="#" data-modal="modalLogin">Login</a></li>
                         <li><a href="#" data-modal="modalCadastro">Cadastro</a></li>
                     </ul>
                     <ul class="navbar navRight" style="display: none;" id="bntsPerfil">
-                        <li><a href="#">Perfil</a></li>
+                        <!--<li><a href="#">Perfil</a></li>-->
+                        <li><a href="simulador.html">Simulador</a></li>
                         <li><a href="#" onclick="sair()">Sair</a></li>
                     </ul>
                 </div>
             </div>
             <h1 class="msg">O lugar onde os treinadores se reunem</h1>
-            <h1 class="msg" id="msgBemVindo">Faça já o seu <a data-modal="modalCadastro" style="text-decoration: underline; cursor: pointer;">cadastro</a> e junte-se há mais de 14054 treinadores
+            <h1 class="msg" id="msgBemVindo">Faça já o seu <a data-modal="modalCadastro" style="text-decoration: underline; cursor: pointer;">cadastro</a> e junte-se há mais de <span id="spanQtdUsuarios"></span> treinadores
             </h1>
         </div>
     </div><!--
@@ -169,8 +170,8 @@
 
                 <div class="card">
                     <div class="cardHeader">
-                        <h3 class="cardTitulo">
-                            Membros online
+                        <h3 class="cardTitulo" style="font-size: 15px;">
+                            Últimos membros logados
                         </h3>
                     </div>
                     <div class="cardContent" id="divUsuariosOnline">
@@ -178,7 +179,7 @@
                     </div>
                     <div class="cardFooter">
                         <div class="cardFooterContent">
-                            Qtde membros online: <span id="spanQtdMembrosOnline"></span>
+                            Quantidade: <span id="spanQtdMembrosOnline"></span>
 
                         </div>
                     </div>
@@ -308,7 +309,7 @@
         validarSessao();
         carregarMembrosOnline();
         carregarUltimoMembro();
-        carregarQtdMembros();
+        
 
         if (sessionStorage.ID_USUARIO != null) {
 
@@ -322,6 +323,8 @@
             mensagensUsuario.innerText = sessionStorage.QTD_MENSAGENS;
             
         }
+
+        carregarQtdMembros();
     </script>
 </body>
 

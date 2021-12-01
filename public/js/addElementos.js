@@ -178,6 +178,7 @@ function carregarQtdMembros() {
         .then(res => {
 
             pMembros.innerText = res[0].qtdUsuarios;
+            spanQtdUsuarios.innerText = res[0].qtdUsuarios;
 
         }
         )

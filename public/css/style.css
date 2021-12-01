@@ -420,9 +420,81 @@ textarea {
     align-items: center;
 }
 
+.telaGame{
+    width: 80%;
+    height: 100vh;
+    background-image: url('../img/pngwing.com.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#telaInicial {
+    width: 100%;
+    height: 100%;
+}
+
+.initGame {
+    position: relative;
+    left: calc(50% - 100px);
+    top: 55%;
+}
+
+.telaPokemon {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.telaGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 300px;
+}
+
+#barrinha {
+    height: 15px;
+    width: 360px;
+    background-color: red;
+    display: flex;
+}
+
+#pokeballIcon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+#telaBox {
+    width: 40%;
+    display: none;
+    height: 30%;
+    padding: 5px;
+    position: relative;
+    left: 30%;
+    top: 30%;
+    flex-wrap: wrap;
+}
+
 @media (max-width: 980px){
-  .cardStatics, .categorias {
+  .cardStatics, .categorias, .card {
       width: 100%;
   }
 
+}
+
+.pokebola {
+    
+    animation-duration: 1.5s;
+    animation-name: pokebola;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pokebola {
+  
+  25%  {transform: rotate(20deg);}
+  50%  {transform: rotate(-20deg);}
+  100% {transform: rotate(0deg);}
 }

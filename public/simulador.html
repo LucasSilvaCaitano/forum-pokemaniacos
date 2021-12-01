@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="header">
+
+
+        <div class="container">
+            <div class="logo">
+
+                <h1>Fórum Pokémaniacos
+                </h1>
+
+            </div>
+            <div class="navs">
+                <ul class="navbar navLeft">
+                    <li><a href="index.html">Inicio</a></li>
+                    <!--        <li><a href="forum.html">Fórum</a></li>-->
+                    <!--<li><a href="index.html">Regras</a></li>-->
+                    <!--<li><a href="membros.html">Membros</a></li>-->
+                </ul>
+                <ul class="navbar navRight" id="bntsLogin">
+                    <li><a href="#" data-modal="modalLogin">Login</a></li>
+                    <li><a href="#" data-modal="modalCadastro">Cadastro</a></li>
+                </ul>
+                <ul class="navbar navRight" style="display: none;" id="bntsPerfil">
+                    <!--<li><a href="#">Perfil</a></li>-->
+                    <li><a href="simulador.html">Simulador</a></li>
+                    <li><a href="#" onclick="sair()">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+
+        </h1>
+
+    </div>
+    <script>
+        
+    </script>
+    <div class="main">
+       <!-- <img src="img/small-pokeball-icon-4.jpg" id="pok" width="50px" height="50px" class="pokebola" id="">-->
+        <div class="container">
+            <div class="telaGame">
+                <div id="telaInicial">
+                    <div class="initGame">
+                        <button class="btn" onclick="iniciar()">Jogar</button>
+                        <button class="btn" onclick="verBox()">Ver box</button>
+                    </div>
+                </div>
+                <!--    <img src="img/pngwing.com.png" alt="" id="src">-->
+                <div id="telaPokemon" style="display: none;">
+                    <div class="telaGroup">
+                        <img style="width: 100px; height: 100px;" alt="" id="imgPokemon">
+                        <h3 id="nomePokemon"></h3>
+                        <div id="barrinha">
+                            <img id="pokeballIcon" src="img/small-pokeball-icon-4.jpg">
+                            <div style="background-color: yellow; width: 50%; height: 100%; margin: auto;">
+                                <div style="background-color: green; width: 50%; height: 100%; margin: auto;">
+                                    <div style="background-color: darkgreen; width: 50%; height: 100%; margin: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn" onclick="capturar()">Capturar</button>
+                            <button class="btn" onclick="start()">Proximo</button>
+                            <button class="btn" onclick="voltar()">Voltar</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="telaBox">
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>© 2021 - Lucas todos os direitos reservados</p>
+
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/addElementos.js"></script>
+    <script src="js/game.js"></script>
+
+    <script>
+
+        validarSessao();
+
+
+
+    </script>
+</body>
+
+</html>

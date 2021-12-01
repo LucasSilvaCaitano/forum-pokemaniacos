@@ -45,8 +45,8 @@ function cadastrarUsuario() {
     else if (genero == undefined) {
         alert("Selecione o gênero")
     }
-    else if (senha.length < 8) {
-        alert("Senha requer no mínimo 8 caracteres")
+    else if (senha.length < 3) {
+        alert("Senha requer no mínimo 3 caracteres")
     }
     else if (senha != confSenha) {
         alert("Senhas diferentes inseridas");

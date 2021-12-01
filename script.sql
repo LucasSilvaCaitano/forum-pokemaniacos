@@ -30,6 +30,15 @@ create table subcategoria (
 	foreign key (fkCategoria) references categoria(idCategoria)
 );
 
+create table pokemon(
+	idPokemon int primary key auto_increment,
+    nomePokemon varchar(45),
+    fotoPokemon varchar(115),
+    spritePokemon varchar(115),
+    lvl int,
+    fkUsuario int,
+    foreign key (fkUsuario) references usuario(idUsuario)
+);
 
 create table topico (
 	idTopico int primary key auto_increment,
@@ -83,23 +92,23 @@ values
 (null, 'Boas vindas', 'Novo no fórum? apresente-se aqui', '/img/foto.jpg', 1),
 (null, 'Sugestões', 'Tem uma idéia do que acrescentar no fórum? poste aqui', '/img/foto.jpg', 1),
 -- Jogos
-(null, 'Geração 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/pallet.jpg', 2),
-(null, 'Geração 2','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 3','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 4','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 6','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 7','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Geração 8','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Pokémon GO','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 2),
-(null, 'Pokémon Unite','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/unite.jpg', 2),
-(null, 'Mystery Dungeon','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/mysteryDungeon.png', 2),
-(null, 'Outros spin-offs','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/colosseum.jpg', 2),
+(null, 'Geração 1','Pokémon Red, Blue, Yellow', '/img/rbg.png', 2),
+(null, 'Geração 2','Pokémon Gold, Silver, Crystal.', '/img/gold.jpg', 2),
+(null, 'Geração 3','Pokémon Ruby, Sapphire, Emerald, Fire Red, Leaf Green', '/img/gen3.jpg', 2),
+(null, 'Geração 4','Pokémon Diamond, Pearl, Platinum, Heart Gold, Soul Silver.', '/img/gen4.jpg', 2),
+(null, 'Geração 5','Pokémon Black, White, Black 2, White 2.', '/img/gen5.jpg', 2),
+(null, 'Geração 6','Pokémon X, Y, Omega Ruby, Alpha Sapphirw', '/img/gen6.jpg', 2),
+(null, 'Geração 7','Pokémon Sun, Moon, Ultra Sun, Ultra Moon, Lets go Pikachu e Eevee', '/img/gen7.jpg', 2),
+(null, 'Geração 8','Pokémon Sword, Shield, Brilliant Diamond, Shinning Pearl.', '/img/gen8.jpeg', 2),
+(null, 'Pokémon GO','Assuntos sobre Pokémon GO.', '/img/foto.jpg', 2),
+(null, 'Pokémon Unite','Assuntos sobre Pokémon Unite.', '/img/unite.jpg', 2),
+(null, 'Mystery Dungeon','Assuntos sobre Pokémon a saga Mystery Dungeon.', '/img/mysteryDungeon.png', 2),
+(null, 'Outros spin-offs','Assuntos sobre jogos que não fazem parte da saga principal.', '/img/colosseum.jpg', 2),
 -- Anime e mangá
-(null, 'Anime','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 3),
-(null, 'Mangá','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 3),
+(null, 'Anime','Assuntos sobre o anime.', '/img/journey.jpeg', 3),
+(null, 'Mangá','Assuntos sobre o mangá.', '/img/manga.jpg', 3),
 -- TCG
-(null, 'TCG','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis sem. Sed tempus felis vel metus commodo, at dictum nunc rutrum. Sed at.', '/img/foto.jpg', 4);
+(null, 'TCG','Assuntos sobre o jogo de cartas.', '/img/tcg.jpg', 4);
 
 select * from usuario;
 
@@ -153,11 +162,6 @@ select * from topico
 join usuario on fkUsuario = idUsuario;
 
 select * from resposta;
-
-select idUsuario, nomeUsuario, emailUsuario, fotoUsuario, count(distinct idTopico) as qtdTopicos, count(idResposta) as qtdMensagens from usuario
-left join topico on topico.fkUsuario = idUsuario
-left join resposta on resposta.fkUsuario = idUsuario
-where emailUsuario = 'ana@gmail.com' and senhaUsuario = '123';
 
 select (select count(idResposta) from resposta
 join topico on fkTopico = idTopico
@@ -360,8 +364,6 @@ WHERE
     
     select count(idTopico) from topico
     where fkUsuario = 1;
-    
-    
     
     SELECT 
     (SELECT 
